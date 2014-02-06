@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'south',
     'debug_toolbar',
     'django_nose',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,6 +72,9 @@ DATABASES = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+RECAPTCHA_PUBLIC_KEY = '6LexMO4SAAAAAGgTgpSWF_QcavxybjGZ4Hckhkhx'
+RECAPTCHA_PRIVATE_KEY = '6LexMO4SAAAAAGjlBM46UJk3fwGzWTUSoLHVhR8j'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
