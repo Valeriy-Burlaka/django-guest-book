@@ -13,7 +13,18 @@ class TestMessageForm(TestCase):
     def tearDown(self):
         os.environ['RECAPTCHA_TESTING'] = 'False'
 
-    def test_clean_valid_form_wo_captcha(self):
-        form_params = {'recaptcha_response_field': 'PASSED'}
+    def test_valid_form(self):
+        # Set environment variable for django_recaptcha
+        # 'PASSED' will be considered as valid value
+        os.environ['RECAPTCHA_TESTING'] = 'True'
+        form_params = {'username': 'Valid User',
+                       'email': 'test@example.com',
+                       'message_body': 'Hello, guest book!',
+                       'recaptcha_response_field': 'PASSED'}
         form = MessageForm(form_params)
         self.assertTrue(form.is_valid())
+        form_data = form.cleaned_data
+        self.assertEqual(form_data['username'], 'Valid User')
+        self.assertEqual(form_data['email'], 'test@example.com')
+        self.assertEqual(form_data['message_body'],
+                         'Hello, guest book!')
