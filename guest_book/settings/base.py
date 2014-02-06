@@ -22,7 +22,7 @@ SECRET_KEY = '8@@tvl_p*s+tpr@ed42fueig=5!j=(u8qfoz-s@nq5phourk6a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -36,6 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'guest_book.apps.book',
+    'south',
+    'debug_toolbar',
+    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,10 +61,16 @@ WSGI_APPLICATION = 'guest_book.wsgi.wsgi_dev.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'guest_book',
+        'HOST': 'localhost',
+        'USER': 'django_user',
+        'PASSWORD': 'django_password',
+        'PORT': '3306'
     }
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
