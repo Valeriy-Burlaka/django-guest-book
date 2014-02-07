@@ -5,7 +5,7 @@ from django.db import models
 class Message(models.Model):
     username = models.CharField(max_length=30)
     user_email = models.EmailField()
-    message_text = models.TextField(max_length=500, )
+    message_text = models.TextField(max_length=500)
     pub_date = models.DateTimeField()
     user_homepage = models.URLField(blank=True)
     user_addr = models.GenericIPAddressField(blank=True, null=True)

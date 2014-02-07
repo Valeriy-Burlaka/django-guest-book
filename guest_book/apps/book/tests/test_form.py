@@ -17,6 +17,7 @@ class TestMessageForm(TestCase):
         # Set environment variable for django_recaptcha
         # 'PASSED' will be considered as valid value
         os.environ['RECAPTCHA_TESTING'] = 'True'
+        # Form should be valid w/o 'homepage' field
         form_params = {'username': 'Valid User',
                        'email': 'test@example.com',
                        'message_body': 'Hello, guest book!',
