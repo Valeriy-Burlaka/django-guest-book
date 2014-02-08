@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'guest_book.apps.book',
     'south',
     'debug_toolbar',
-    'django_nose',
-    'captcha',
+    'django_nose',  # alleviate test running
+    'captcha',  # tools for using reCAPTCHA
 )
 
 MIDDLEWARE_CLASSES = (
