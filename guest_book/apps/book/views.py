@@ -12,6 +12,7 @@ class MessageBoardView(FormView):
     template_name = "book/message_board.html"
     form_class = MessageForm
     success_url = reverse_lazy('book:board')
+    paginate_messages_by = 10
 
     def form_valid(self, form):
         data = form.cleaned_data
@@ -35,9 +36,9 @@ class MessageBoardView(FormView):
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
         messages = Message.objects.all()
-        paginator = Paginator(messages, 10)
+        paginator = Paginator(messages, self.paginate_messages_by)
         # if no page provided return the first page
-        index = int(self.request.REQUEST.get('page', 1))
+        index = int(self.kwargs.get('page', 1))
         try:
             page = paginator.page(index)
         except EmptyPage:
