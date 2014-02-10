@@ -23,6 +23,11 @@ class Message(models.Model):
         self.message_text = self.convert_message_text(self.message_text)
         super(Message, self).save(**kwargs)
 
+    def __unicode__(self):
+        return "{name} | {email} | {date}".format(name=self.username,
+                                                  email=self.user_email,
+                                                  date=self.pub_date)
+
     def convert_message_text(self, message_text):
         class MyLinkTag(postmarkup.LinkTag):
             """
