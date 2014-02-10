@@ -14,6 +14,25 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
+                <div class="row">
+                <ul class="pagination">
+                    {% if page.has_previous %}
+                        <li><a href="{% url 'book:board_page' page=page.previous_page_number">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><a>&laquo;</a></li>
+                    {% endif %}
+                    {% for index in page_numbers %}
+                        <li {% ifequal index page.number %}class="active"{% endifequal %}>
+                            <a href="{% url 'book:board_page' page=index %}">{{ index }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+                <div class="row">
+                    {% for message in page %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                </div>
             </div>
             <div class="col-lg-6">
                 <form role="form" class="form-horizontal" action="{% url 'book:board' %}" method="post">

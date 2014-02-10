@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import FormView
+from django.core.paginator import Paginator, EmptyPage
 
 import httpagentparser
 from .forms import MessageForm
@@ -33,5 +34,16 @@ class MessageBoardView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
-        context['messages'] = Message.objects.all()
+        messages = Message.objects.all()
+        paginator = Paginator(messages, 10)
+        # if no page provided return the first page
+        index = int(self.request.REQUEST.get('page', 1))
+        try:
+            page = paginator.page(index)
+        except EmptyPage:
+            # if requested page is out of range, deliver the last page
+            page = paginator.page(paginator.num_pages)
+        context['page'] = page
+        context['page_numbers'] = paginator.page_range
+
         return context
