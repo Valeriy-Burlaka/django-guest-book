@@ -62,6 +62,7 @@
             <!--Right column, form to add messages on the board-->
             <div class="col-lg-6">
                 <form role="form" class="form-horizontal" action="{% url 'book:board' %}" method="post">
+                    <h3><span class="label label-default">Left us your meaningful opinion</span></h3>
                     <div class="form-group">
                         <div class="col-sm-6 {% if form.errors.username %}has-error{% endif %}">
                             <label for="id_username">Name *</label>
