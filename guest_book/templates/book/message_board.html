@@ -13,27 +13,53 @@
             </div>
         </div>
         <div class="row">
+            <!--Left column, list of messages on the board-->
             <div class="col-lg-6">
+                <!--Pagination links-->
                 <div class="row">
-                <ul class="pagination">
-                    {% if page.has_previous %}
-                        <li><a href="{% url 'book:board_page' page=page.previous_page_number">&laquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><a>&laquo;</a></li>
-                    {% endif %}
-                    {% for index in page_numbers %}
-                        <li {% ifequal index page.number %}class="active"{% endifequal %}>
-                            <a href="{% url 'book:board_page' page=index %}">{{ index }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <ul class="pagination">
+                        {% if page.has_previous %}
+                            <li><a href="{% url 'book:board_page' page=page.previous_page_number">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><a>&laquo;</a></li>
+                        {% endif %}
+                        {% for index in page_numbers %}
+                            <li {% ifequal index page.number %}class="active"{% endifequal %}>
+                                <a href="{% url 'book:board_page' page=index %}">{{ index }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <li><a href="{% url 'book:board_page' page=page.next_page_number">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><a>&raquo;</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
+                <!--End pagination-->
+                <!--Board messages themselves-->
                 <div class="row">
-                    {% for message in page %}
-                        <div>{{ message }}</div>
-                    {% endfor %}
+                    <ul class="media-list">
+                        {% for message in page %}
+                            <li class="media">
+                                <!--<a class="pull-left" href="#">-->
+                                  <!--<img class="media-object" src="" alt="">-->
+                                <!--</a>-->
+                                <div class="media-body">
+                                    <h5 class="media-heading">
+                                        Author: {{ message.username }} | {{ message.user_email }} |
+                                        Date published: {{ message.pub_date }} |
+                                        {% if message.user_homepage %}Homepage: message.user_homepage{% endif %}
+                                    </h5>
+                                    {{ message.message_text|safe }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
+                <!--End board messages-->
             </div>
+            <!--End left column-->
+            <!--Right column, form to add messages on the board-->
             <div class="col-lg-6">
                 <form role="form" class="form-horizontal" action="{% url 'book:board' %}" method="post">
                     <div class="form-group">
