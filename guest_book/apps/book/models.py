@@ -1,5 +1,4 @@
 from django.utils import timezone
-from django.utils.html import escape
 from django.db import models
 import postmarkup
 
@@ -13,9 +12,10 @@ class Message(models.Model):
     user_addr = models.GenericIPAddressField(blank=True, null=True)
     user_browser = models.CharField(max_length=100, blank=True)
 
-    ALLOWED_MARKUP = ['b', 's', 'u', 'i']
+    ALLOWED_MARKUP = ['b', 's', 'u', 'i']  # Allowed BBCodes
 
     class Meta:
+        verbose_name_plural = 'Messages'
         ordering = ['-pub_date']
 
     def save(self, **kwargs):
