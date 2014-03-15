@@ -4,6 +4,7 @@
     <title>Welcome</title>
     {% load static from staticfiles %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,7 +49,7 @@
                                     <h5 class="media-heading">
                                         Author: {{ message.username }} | {{ message.user_email }} |
                                         Date published: {{ message.pub_date }} |
-                                        {% if message.user_homepage %}Homepage: message.user_homepage{% endif %}
+                                        {% if message.user_homepage %}Homepage: {{ message.user_homepage }}{% endif %}
                                     </h5>
                                     {{ message.message_text|safe }}
                                 </div>
