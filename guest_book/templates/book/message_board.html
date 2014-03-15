@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    {% load static from staticfiles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h3>Wait! Have you ever seen 2-columns guest book?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <!--Left column, list of messages on the board-->
+            <div class="col-lg-6">
+                <!--Pagination links-->
+                <div class="row">
+                    <ul class="pagination">
+                        {% if page.has_previous %}
+                            <li><a href="{% url 'book:board_page' page=page.previous_page_number %}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><a>&laquo;</a></li>
+                        {% endif %}
+                        {% for index in page_numbers %}
+                            <li {% ifequal index page.number %}class="active"{% endifequal %}>
+                                <a href="{% url 'book:board_page' page=index %}">{{ index }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <li><a href="{% url 'book:board_page' page=page.next_page_number %}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><a>&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!--End pagination-->
+                <!--Board messages themselves-->
+                <div class="row">
+                    <ul class="media-list">
+                        {% for message in page %}
+                            <li class="media">
+                                <!--<a class="pull-left" href="#">-->
+                                  <!--<img class="media-object" src="" alt="">-->
+                                <!--</a>-->
+                                <div class="media-body">
+                                    <h5 class="media-heading">
+                                        Author: {{ message.username }} | {{ message.user_email }} |
+                                        Date published: {{ message.pub_date }} |
+                                        {% if message.user_homepage %}Homepage: {{ message.user_homepage }}{% endif %}
+                                    </h5>
+                                    {{ message.message_text|safe }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!--End board messages-->
+            </div>
+            <!--End left column-->
+            <!--Right column, form to add messages on the board-->
+            <div class="col-lg-6">
+                <form role="form" class="form-horizontal" action="{% url 'book:board' %}" method="post">
+                    <h3><span class="label label-default">Left us your meaningful opinion</span></h3>
+                    <div class="form-group">
+                        <div class="col-sm-6 {% if form.errors.username %}has-error{% endif %}">
+                            <label for="id_username">Name *</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="help-inline h6">{{ form.username.errors.as_text}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6 {% if form.errors.email %}has-error{% endif %}">
+                            <label for="id_email">E-mail *</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="help-block h6">{{ form.email.errors.as_text }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6 {% if form.errors.homepage %}has-error{% endif %}">
+                            <label for="id_homepage">Homepage</label>
+                            {{ form.homepage }}
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="help-block h6">{{ form.homepage.errors|striptags }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 {% if form.errors.message_body %}has-error{% endif %}">
+                            <label for="id_message_body">Message text *</label>
+                            {{ form.message_body }}
+                        </div>
+                        <div class="col-xs-3">
+                            <p class="help-block h6">{{ form.message_body.errors.as_text }}</p>
+                        </div>
+                    </div>
+                    <!--<p class="help-block">* These fields are required</p>-->
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                            {{ form.captcha }}
+                        </div>
+                        <div class="col-xs-2">
+                            <p class="help-block h6">{{ form.captcha.errors.as_text }}</p>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-default" value="Submit">
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

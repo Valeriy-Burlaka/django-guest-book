@@ -39,7 +39,9 @@ INSTALLED_APPS = (
     'guest_book.apps.book',
     'south',
     'debug_toolbar',
-    'django_nose',
+    'django_nose',  # alleviate test running
+    # provides reCAPTCHA field (https://github.com/praekelt/django-recaptcha)
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,6 +74,9 @@ DATABASES = {
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
+RECAPTCHA_PUBLIC_KEY = '6LexMO4SAAAAAGgTgpSWF_QcavxybjGZ4Hckhkhx'
+RECAPTCHA_PRIVATE_KEY = '6LexMO4SAAAAAGjlBM46UJk3fwGzWTUSoLHVhR8j'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -90,3 +95,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
