@@ -20,7 +20,7 @@ class MessageForm(forms.Form):
                                         {'placeholder': 'You may enter your site address',
                                          'class': 'form-control input-sm'})
                              )
-    message_body = forms.CharField(max_length=500, min_length=1,
+    message_body = forms.CharField(max_length=750, min_length=1,
                                    widget=forms.Textarea(attrs=\
                                         {'id':'comment',
                                          'placeholder': 'Enter your message',

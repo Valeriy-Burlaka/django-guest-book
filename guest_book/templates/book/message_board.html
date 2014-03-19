@@ -49,11 +49,14 @@
                                 <!--</a>-->
                                 <div class="media-body">
                                     <h5 class="media-heading">
-                                        Author: {{ message.username }} | {{ message.user_email }} |
-                                        Date published: {{ message.pub_date }} |
-                                        {% if message.user_homepage %}Homepage: {{ message.user_homepage }}{% endif %}
+                                        <strong>{{ message.username }}</strong> |
+                                        <strong>{{ message.user_email }}</strong> |
+                                        <strong>{{ message.pub_date }}</strong>
+                                        {% if message.user_homepage %}
+                                            | <strong>{{ message.user_homepage }}</strong>
+                                        {% endif %}
                                     </h5>
-                                    {{ message.message_text|safe }}
+                                    <span class="message_body">{{ message.message_text|safe }}</span>
                                 </div>
                             </li>
                         {% endfor %}
