@@ -34,7 +34,7 @@ class MessageForm(forms.Form):
         # (spaces, line breaks)
         match = re.search(r'^\s+$', data)
         if match:
-            raise forms.ValidationError("Please left us something "
-                                        "more meaningful than spaces")
+            raise forms.ValidationError("Please left us something more "
+                                        "meaningful than blank message")
         return data
 

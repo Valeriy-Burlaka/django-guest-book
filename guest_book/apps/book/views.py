@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator, EmptyPage
 
 import httpagentparser
 from .forms import MessageForm
 from .models import Message
+
+
+def index_redirect(request):
+    return redirect(reverse('book:board'))
 
 
 class MessageBoardView(FormView):
@@ -18,8 +22,8 @@ class MessageBoardView(FormView):
         data = form.cleaned_data
         user_addr = self.request.META.get('REMOTE_ADDR', '')
         try:
-            ua = self.request.META['HTTP_USER_AGENT']
-            info = httpagentparser.detect(ua)
+            user_agent = self.request.META['HTTP_USER_AGENT']
+            info = httpagentparser.detect(user_agent)
             user_browser = info['browser']['name']
             data['user_browser'] = user_browser
         except KeyError:
