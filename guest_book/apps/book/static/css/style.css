@@ -8,3 +8,15 @@
 	height: 24px;
 }
 
+.message_body {
+    border: 1px solid #808080;
+    background-color: #ccc;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+    color: black;
+    white-space: normal;
+    text-align: left;
+    display: inline-block;
+}
+
