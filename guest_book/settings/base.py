@@ -53,7 +53,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'guest_book.apps.book',
     'south',
-    'debug_toolbar',
     'django_nose',  # alleviate test running
     # provides reCAPTCHA field (https://github.com/praekelt/django-recaptcha)
     'captcha',
@@ -70,22 +69,10 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'guest_book.urls'
 
-WSGI_APPLICATION = 'guest_book.wsgi.wsgi_dev.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'guest_book',
-        'HOST': 'localhost',
-        'USER': 'django_user',
-        'PASSWORD': 'django_password',
-        'PORT': '3306'
-    }
-}
+DATABASES = {}
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
