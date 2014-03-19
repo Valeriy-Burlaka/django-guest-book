@@ -1,0 +1,4 @@
+# requirements.txt
+-r guest_book/requirements/prod.txt
+
+
