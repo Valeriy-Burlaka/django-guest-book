@@ -22,7 +22,8 @@ class MessageForm(forms.Form):
                              )
     message_body = forms.CharField(max_length=500, min_length=1,
                                    widget=forms.Textarea(attrs=\
-                                        {'placeholder': 'Enter your message',
+                                        {'id':'comment',
+                                         'placeholder': 'Enter your message',
                                          'class': 'form-control input-sm',
                                          'rows': '4'})
                                   )
@@ -34,7 +35,7 @@ class MessageForm(forms.Form):
         # (spaces, line breaks)
         match = re.search(r'^\s+$', data)
         if match:
-            raise forms.ValidationError("Please left us something "
-                                        "more meaningful than spaces")
+            raise forms.ValidationError("Please left us something more "
+                                        "meaningful than blank message")
         return data
 

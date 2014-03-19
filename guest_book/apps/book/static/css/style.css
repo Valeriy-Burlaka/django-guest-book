@@ -1,0 +1,10 @@
+.actions img {
+	border: 1px solid #bcbcbc;
+	margin: 5px 10px 5px 0;
+	cursor: pointer;
+	display: block;
+	float: left;
+	width: 24px;
+	height: 24px;
+}
+
