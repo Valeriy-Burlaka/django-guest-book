@@ -28,8 +28,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 # Do not use suggested 465 port for google SMTP. See
 # https://code.djangoproject.com/ticket/9575
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'chebusun@gmail.com'
-EMAIL_HOST_PASSWORD = 'H7IYrkL3SktM>4=1.cBS{07`'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = 'django@my-domain.com'
@@ -76,8 +76,8 @@ DATABASES = {}
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-RECAPTCHA_PUBLIC_KEY = '6LexMO4SAAAAAGgTgpSWF_QcavxybjGZ4Hckhkhx'
-RECAPTCHA_PRIVATE_KEY = '6LexMO4SAAAAAGjlBM46UJk3fwGzWTUSoLHVhR8j'
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
