@@ -28,8 +28,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 # Do not use suggested 465 port for google SMTP. See
 # https://code.djangoproject.com/ticket/9575
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'chebusun@gmail.com'
+EMAIL_HOST_PASSWORD = 'H7IYrkL3SktM>4=1.cBS{07`'
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = 'django@my-domain.com'
